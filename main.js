@@ -1,4 +1,4 @@
-const panoramaImage = new PANOLENS.ImagePanorama("images/1st.jpg");
+const panoramaImage = new PANOLENS.ImagePanorama("images/main_gate.jpg");
 const imageContainer = document.querySelector(".image-container");
 
 const viewer = new PANOLENS.Viewer({

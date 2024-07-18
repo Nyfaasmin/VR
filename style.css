@@ -8,7 +8,9 @@ body {
   align-items: center;
   background: #111;
 }
-
+.hidden {
+  display: none;
+}
 .main-container .image-container {
   /* flex: 1; */
   height: 100%;
