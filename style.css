@@ -8,16 +8,23 @@ body {
   align-items: center;
   background: #111;
 }
-.hidden {
-  display: none;
-}
+
 .main-container .image-container {
   /* flex: 1; */
   height: 100%;
   position: fixed;
   width: 100%;
 }
+.custom-infospot img {
+  border: 2px solid #fff; /* Adjust the border color and width as needed */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Optional: add a shadow for better visibility */
+  transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transition for border */
+}
 
+.custom-infospot img:hover {
+  border: 4px solid #ff0000; /* Highlight border on hover */
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.7); /* Highlight shadow on hover */
+}
 .main-container h1 {
   flex: 1;
   text-align: center;
@@ -27,8 +34,42 @@ body {
   font-size: 60px;
   font-weight: 800;
   letter-spacing: 10px;
-
   z-index: 100;
   text-shadow: 2px 16px 16px rgba(0, 0, 0, 0.3);
   pointer-events: none;
+}
+.infospot-overlay {
+  position: absolute;
+  border: 2px solid red; /* Highlight color */
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Adjustments for styling specific elements */
+.infospot1 {
+  top: 20%;
+  left: 30%;
+  width: 40px; /* Adjust size as needed */
+  height: 40px; /* Adjust size as needed */
+  opacity: 100;
+}
+
+.infospot2 {
+  top: 40%;
+  left: 60%;
+  width: 40px; /* Adjust size as needed */
+  height: 40px; /* Adjust size as needed */
+}
+.image-container {
+  width: 100%;
+  height: 100vh;
+  border: 5px solid black; /* Border around the panorama viewer */
+}
+.vanish {
+  opacity: 0;
+  transition: opacity 2s ease-out; /* Optional: Smooth transition effect */
+}
+
+.hidden {
+  display: none;
 }

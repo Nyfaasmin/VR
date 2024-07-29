@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1st image</title>
+    <style>
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: white;
+        }
+
+        .main-container .image-container {
+            height: 80vh;
+            width: 100%;
+            position: relative;
+        }
+
+        .h {
+            margin-bottom: 20px;
+        }
+
+        button {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="image-container"><button onclick="sayHello('images/Mess.jpg','images/Mess.jpg','images/Mess.jpg','images/Mess.jpg','images/Mess.jpg')">arrow</button></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/105/three.min.js" integrity="sha512-uWKImujbh9CwNa8Eey5s8vlHDB4o1HhrVszkympkm5ciYTnUEQv3t4QHU02CUqPtdKTg62FsHo12x63q6u0wmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="js/panolens.min.js"></script>
+    <script src="image1.js"></script>
+</body>
+</html>

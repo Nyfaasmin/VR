@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Map with Panorama</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: black;
+        }
+        #map-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+        #map {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .mark {
+        position: absolute;
+        width: 32px; /* Adjust width as needed */
+        height: 32px; /* Adjust height as needed */
+        background-image: url('images/pointer.png'); /* Path to your icon */
+        background-size: cover;
+        cursor: pointer;
+        /* Add any other styles you need */
+    }
+        #panorama-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            background: rgba(0, 0, 0, 0.8);
+        }
+        #close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            background-color: white;
+            color: black;
+            border: none;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div id="map-container">
+        <img id="map" src="images/map1.jpg" alt="Map not available">
+        <div class="mark" style="top: 200px; left: 620px;" data-picture="images/Bblock.jpg" title="B Block"></div>
+        <div class="mark" style="top: 260px; left: 640px;" data-picture="images/Way_to_audi.jpg" title="Way to open audi"></div>
+        <div class="mark" style="top: 320px; left: 650px;" data-picture="images/Openaudi.jpg" title="Open audi"></div>
+        <div class="mark" style="top: 250px; left: 580px;" data-picture="images/Jewel1.jpg" title="Way to jewel"></div>
+        <div class="mark" style="top: 340px; left: 540px;" data-picture="images/Sita audi.jpg" title="Way to sita audi"></div>
+        <div class="mark" style="top: 180px; left: 560px;" data-picture="images/Cblock.jpg" title="C Block"></div>
+        <div class="mark" style="top: 220px; left: 680px;" data-picture="images/Ablock.jpg" title="A Block"></div>
+        <div class="mark" style="top: 380px; left: 720px;" data-picture="images/Dblock.jpg" title="D Block"></div>
+        <div class="mark" style="top: 230px; left: 520px;" data-picture="images/Library.jpg" title="Library"></div>
+        <div class="mark" style="top: 660px; left: 760px;" data-picture="images/Main_Gate.jpg" title="Main Entrance"></div>
+        <div class="mark" style="top: 640px; left: 7650px;" data-picture="images/After_MainGate.jpg" title="Gandhi statue"></div>
+        <div class="mark" style="top: 600px; left: 780px;" data-picture="images/Main_Gate2.jpg" title="Way to TS"></div>
+        <div class="mark" style="top: 540px; left: 790px;" data-picture="images/TS.jpg" title="TS"></div>
+        <div class="mark" style="top: 520px; left: 820px;" data-picture="images/After_TS.jpg" title="Way to Temple"></div>
+        <div class="mark" style="top: 490px; left: 800px;" data-picture="images/Temple.jpg" title="Temple"></div>
+        <div class="mark" style="top:490px; left: 760px;" data-picture="images/After_temple.jpg" title="Way to mess"></div>
+        <div class="mark" style="top: 470px; left: 730px;" data-picture="images/Mess.jpg" title="Mess"></div>
+        <div class="mark" style="top: 470px; left: 700px;" data-picture="images/Memorial_Start.jpg" title="Way to memorial"></div>
+        <div class="mark" style="top: 450px; left: 690px;" data-picture="images/Museum1.jpg" title="Memorial"></div>
+        <div class="mark" style="top: 430px; left: 680px;" data-picture="images/Museum2.jpg" title="Museum"></div>
+        <div class="mark" style="top: 480px; left: 660px;" data-picture="images/TeluguTalli.jpg" title="TeluguTalli"></div>
+        <div class="mark" style="top: 460px; left: 620px;" data-picture="images/Yoga.jpg" title="Yoga statues"></div>
+        <div class="mark" style="top: 370px; left: 600px;" data-picture="images/Garden.jpg" title="Garden"></div>
+        <div class="mark" style="top: 440px; left: 660px;" data-picture="images/Dblock_Start.jpg" title="Way to D-block"></div>
+        <div class="mark" style="top: 420px; left: 670px;" data-picture="images/Before_dblock.jpg" title="Before D-block& end of memorial"></div>
+        <div class="mark" style="top: 350px; left: 690px;" data-picture="images/After_Dblock.jpg" title="After Dblock"></div>
+        <div class="mark" style="top: 320px; left: 700px;" data-picture="images/After_Dblock2.jpg" title="near hostels"></div>
+        <div class="mark" style="top: 280px; left: 710px;" data-picture="images/Yummyhut.jpg" title="near yummy hut"></div>
+    </div>
+    <div id="panorama-container">
+        <button id="close-button">&times;</button>
+    </div>
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/three.js/105/three.min.js"
+        integrity="sha512-uWKImujbh9CwNa8Eey5s8vlHDB4o1HhrVszkympkm5ciYTnUEQv3t4QHU02CUqPtdKTg62FsHo12x63q6u0wmg=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer">
+    </script>
+    <script src="js/panolens.min.js"></script>
+    <script>
+        document.querySelectorAll('.mark').forEach(mark => {
+            mark.addEventListener('click', function() {
+                const pictureSrc = mark.getAttribute('data-picture');
+                const panoramaContainer = document.getElementById('panorama-container');
+
+                console.log('Mark clicked:', pictureSrc);
+
+                // Clear previous panorama if exists
+                panoramaContainer.innerHTML = '<button id="close-button">&times;</button>';
+
+                // Create new panorama
+                const panoramaImage = new PANOLENS.ImagePanorama(pictureSrc);
+
+                // Create new viewer
+                const viewer = new PANOLENS.Viewer({
+                    container: panoramaContainer,
+                    autoRotate: true,
+                    autoRotateSpeed: 0.3,
+                });
+
+                viewer.add(panoramaImage);
+
+                // Show panorama container
+                panoramaContainer.style.display = 'block';
+
+                // Add event listener to close button
+                document.getElementById('close-button').addEventListener('click', function() {
+                    panoramaContainer.style.display = 'none';
+                });
+            });
+        });
+
+        // Function to hide the panorama view when clicked outside
+        document.getElementById('panorama-container').addEventListener('click', function(event) {
+            if (event.target.id === 'panorama-container') {
+                this.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
