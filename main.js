@@ -12,7 +12,7 @@ const viewer = new PANOLENS.Viewer({
 viewer.add(panoramaImage);
 viewer.add(panoramaImage1);
 
-const infospot1 = new PANOLENS.Infospot(1000,'images/pointer.png');
+const infospot1 = new PANOLENS.Infospot(1000,'images/pointer.jpg');
 infospot1.position.set(10000,0, -5000);
 
 infospot1.addEventListener("click", function () {
